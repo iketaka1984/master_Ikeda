@@ -823,6 +823,11 @@ def read_contract_table(exp_name,exp_PC,ens_name,ens_PC,exp_com,exp_opr,ens_com,
     count_exp=0
     count_ens=0
     bef=0
+    if con_table=='':
+        exp_PC=100000
+        ens_PC=100000
+        f3.close()
+        return (exp_name,exp_PC,ens_name,ens_PC,exp_com,exp_opr,ens_com,ens_opr,exp_xpath,ens_xpath)
     for l in con_table.split("\n"):
         if l[0]=='{':
             if bef==0:
