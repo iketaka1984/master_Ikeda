@@ -1051,6 +1051,17 @@ void EXP(s_table[] arr_table,s_table[] proc_table): {Token token1;
 	} 
 	 (EC(arr_table,proc_table)|PR(arr_table,proc_table)) <RBRACKET> <RBRACKET>
 	{try{
+		FileWriter code = new FileWriter("contract_table.txt",true);
+		code.write("(");
+		code.write(String.format("%2d ",Parser.op));
+		code.write(String.format("    1"));
+		code.write(")");
+		code.close();
+	}catch(IOException e){
+		System.err.println("err");
+	}
+	}
+	{try{
 		FileWriter table = new FileWriter("contract_table.txt",true);
 		table.write("}\n");
 		table.close();
@@ -1085,6 +1096,17 @@ void ENS(s_table[] arr_table,s_table[] proc_table): {Token token1;
 	}
 	}
 	(EC(arr_table,proc_table) | PR(arr_table,proc_table)) <RBRACKET> <RBRACKET>
+	{try{
+		FileWriter code = new FileWriter("contract_table.txt",true);
+		code.write("(");
+		code.write(String.format("%2d ",Parser.op));
+		code.write(String.format("    1"));
+		code.write(")");
+		code.close();
+	}catch(IOException e){
+		System.err.println("err");
+	}
+	}
 	{try{
 		FileWriter table = new FileWriter("contract_table.txt",true);
 		table.write("}\n");
@@ -1263,6 +1285,18 @@ void EC(s_table[] arr_table,s_table[] proc_table): {
 void EC2(s_table[] arr_table,s_table[] proc_table): {
 } {
     <LPAREN> EE(arr_table,proc_table) (EB(arr_table,proc_table))* <RPAREN>
+	| <TRUE> 
+	{try{
+		FileWriter code = new FileWriter("contract_table.txt",true);
+		code.write("(");
+		code.write(String.format("%2d ",Parser.ipush));
+		code.write(String.format("    1"));
+		code.write(")");
+		code.close();
+	}catch(IOException e){
+		System.err.println("err");
+	}
+	}
 }
 
 void EB(s_table[] arr_table,s_table[] proc_table): {
@@ -1444,7 +1478,7 @@ void PR(s_table[] arr_table,s_table[] proc_table): {
 		System.err.println("err");
 	}
 	}
-	| <TRUE> 
+	| <MULT>
 	{try{
 		FileWriter code = new FileWriter("contract_table.txt",true);
 		code.write("(");
